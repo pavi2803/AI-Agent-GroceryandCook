@@ -12,6 +12,7 @@ build/
 develop-eggs/
 dist/
 downloads/
+local_models/
 eggs/
 .eggs/
 lib/
