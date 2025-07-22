@@ -1,17 +1,14 @@
-from transformers import AutoTokenizer, AutoModelForCausalLM
-import torch
+from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 
-# Specify the model ID and local save path
-model_id = "microsoft/phi-3-mini-128k-instruct"
-save_path = "local_models/phi3-mini-128k-instruct"
+model_name = "google/flan-t5-small"
+tokenizer = AutoTokenizer.from_pretrained(model_name)
+model = AutoModelForSeq2SeqLM.from_pretrained(model_name)
 
-# Load tokenizer and model from Hugging Face
-tokenizer = AutoTokenizer.from_pretrained(model_id)
-model = AutoModelForCausalLM.from_pretrained(
-    model_id,
-    torch_dtype=torch.float32  # Use float32 if you're on MPS
-).to("mps")  # Or use "cpu" if needed
+ingredients = "eggs, spinach, cheese"
+prompt = f"Given these ingredients: {ingredients}. Suggest a recipe to cook."
 
-# Save to local directory
-tokenizer.save_pretrained(save_path)
-model.save_pretrained(save_path)
+inputs = tokenizer(prompt, return_tensors="pt")
+outputs = model.generate(**inputs, max_length=100)
+recipe = tokenizer.decode(outputs[0], skip_special_tokens=True)
+
+print(recipe)
