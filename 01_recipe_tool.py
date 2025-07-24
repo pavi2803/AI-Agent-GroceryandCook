@@ -5,6 +5,10 @@ model_name = "google/flan-t5-small"
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 model = AutoModelForSeq2SeqLM.from_pretrained(model_name)
 
+
+
+
+
 def get_recipe(ingredients: str) -> str:
     prompt = f"What dishes can I make for dinner using only and just these ingredients: {ingredients}?"
     inputs = tokenizer(prompt, return_tensors="pt")
