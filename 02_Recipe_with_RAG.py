@@ -55,4 +55,4 @@ import psutil
 print(f"Available memory: {psutil.virtual_memory().available / 1e9:.2f} GB")
 
 
-print(get_suggestion("baby spinach, feta"))
+print(get_suggestion("cream cheese, feta"))

@@ -88,4 +88,4 @@ import psutil
 print(f"Available memory: {psutil.virtual_memory().available / 1e9:.2f} GB")
 
 # Run an example query
-print(get_suggestion("bread, butter, egg, milk"))
+print(get_suggestion("pretzel feta, onion"))
